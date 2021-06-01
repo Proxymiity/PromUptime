@@ -32,13 +32,17 @@ def http_request(node, address):
 
 @ping.time()
 def icmp_request(node, address):
-    r = pythonping.ping(address, count=1)
-    if r.packet_loss > 0:
+    try:
+        r = pythonping.ping(address, count=1)
+        if r.packet_loss > 0:
+            success = 'down'
+            times.labels(node).set(-1)
+        else:
+            success = 'up'
+            times.labels(node).set(r.rtt_avg*1000)
+    except Exception as e:
+        print(e)
         success = 'down'
-        times.labels(node).set(-1)
-    else:
-        success = 'up'
-        times.labels(node).set(r.rtt_avg*1000)
     report.labels(node).state(success)
 
 

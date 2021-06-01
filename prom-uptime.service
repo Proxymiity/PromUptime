@@ -10,6 +10,7 @@ ExecStart=/srv/prom-uptime/venv/bin/python /srv/prom-uptime/exporter.py
 # User root required for ICMP ping
 User=root
 Group=root
+Restart=always
 
 [Install]
 WantedBy=multi-user.target
