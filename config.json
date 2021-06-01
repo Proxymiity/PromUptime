@@ -1,0 +1,14 @@
+{
+  "port": 8700,
+  "sleep_secs": 30,
+  "nodes": {
+    "google":  {
+      "address": "https://google.com",
+      "method": "http"
+    },
+    "gmail":  {
+      "address": "gmail.com",
+      "method": "ping"
+    }
+  }
+}

@@ -1,0 +1,15 @@
+[Unit]
+Description=Exposes a Prometheus endpoint with node statuses.
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+WorkingDirectory=/srv/prom-uptime
+ExecStart=/srv/prom-uptime/venv/bin/python /srv/prom-uptime/exporter.py
+# User root required for ICMP ping
+User=root
+Group=root
+
+[Install]
+WantedBy=multi-user.target
